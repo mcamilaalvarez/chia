@@ -17,7 +17,12 @@ class _CommonDropdownButtonState extends State<CommonDropdownButton> {
   List<String> dropdownItems = [
 
   ];
+  String dropdownValue =  '';
 
+  void initState() {
+    dropdownValue = widget.items[0];
+    super.initState();
+  }
 
   List<DropdownMenuItem<String>> _setList() {
     dropdownItems = widget.items;
@@ -34,10 +39,9 @@ class _CommonDropdownButtonState extends State<CommonDropdownButton> {
         .toList();
   }
 
-  String dropdownValue = '';
 
   Widget build(BuildContext context) {
-    dropdownValue = widget.items[0];
+
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
 
@@ -52,38 +56,32 @@ class _CommonDropdownButtonState extends State<CommonDropdownButton> {
                 : Theme.of(context).primaryColor,
           )),
       child: Padding(
-        padding: (queryData.size.width > 600) ? EdgeInsets.fromLTRB(8, 3, 5, 0) :EdgeInsets.fromLTRB(8, 3, 0, 0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Theme(
-              data: Theme.of(context)
-                  .copyWith(canvasColor: Theme.of(context).backgroundColor),
-              child: Container(
-                width: (queryData.size.width > 600) ? queryData.size.width * 0.90 :queryData.size.width * 0.815,
-                child: DropdownButton<String>(
-                  isExpanded: true,
-                  underline: Container(),
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                  value: dropdownValue,
-                  icon: Row(
-                    children: [
-                      Text( widget.wordButton, style: TextStyle(color: Theme.of(context).primaryColor ),),
-                      Icon( Icons.keyboard_arrow_right , color: Theme.of(context).primaryColor,)
-                    ],
-                  ),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownValue = newValue!;
-                    });
-                  },
-                  items: _setList(),
-                ),
+        padding: const EdgeInsets.fromLTRB(10, 5, 8, 0),
+        child: Theme(
+          data: Theme.of(context)
+              .copyWith(canvasColor: Theme.of(context).backgroundColor),
+          child: Container(
+            child: DropdownButton<String>(
+              isExpanded: true,
+              underline: Container(),
+              style: TextStyle(
+                color: Colors.white,
               ),
-            )
-          ],
+              value: dropdownValue,
+              icon: Row(
+                children: [
+                  Text( widget.wordButton, style: TextStyle(color: Theme.of(context).primaryColor ),),
+                  Icon( Icons.keyboard_arrow_right , color: Theme.of(context).primaryColor,)
+                ],
+              ),
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdownValue = newValue!;
+                });
+              },
+              items: _setList(),
+            ),
+          ),
         ),
       ),
     );

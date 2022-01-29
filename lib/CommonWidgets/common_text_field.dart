@@ -117,7 +117,7 @@ class _commonTextFieldState extends State<commonTextField> {
                     : Theme.of(context).primaryColor,
               )),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 5, 8, 0),
+            padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
